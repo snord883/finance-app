@@ -12,7 +12,7 @@ export default class DateBar extends Component {
                               Object.keys(this.props.transactions[year])
                                 .map(month => 
                                   year*100 + month*1)).flat();
-
+                                  
     minDate = Math.min(...dateRange);
     maxDate = Math.max(...dateRange);
   }
@@ -22,7 +22,7 @@ export default class DateBar extends Component {
     newDate = this.checkAgainstRange(newDate);
 
     return (
-      <Link to={this.getLink(newDate)} style={this.getStyle(newDate.isCapped)}>{arrowIcon}</Link>
+      <Link to={this.getLink(newDate)} style={this.getStyle(newDate.isEndOfRange)}>{arrowIcon}</Link>
     );
   }
 
@@ -34,33 +34,40 @@ export default class DateBar extends Component {
   }
 
   getDate(monthsMoved){
+    let newMonth = this.props.month == null ? 1 : this.props.month;
     let newDate = new Date;
-    newDate.setFullYear(this.props.year, this.props.month + monthsMoved,1);
+    newDate.setFullYear(this.props.year, newMonth + monthsMoved,1);
     let offset = ((this.props.month + monthsMoved) == 0) ? 1 : 0;
 
-    return {year:newDate.getYear() + 1900 - offset,month:newDate.getMonth() + offset*12, isCapped:false};
+    return {year:newDate.getYear() + 1900 - offset,month:newDate.getMonth() + offset*12, isEndOfRange:false};
   }
 
-  checkAgainstRange(newDate){
+  checkAgainstRange(newDate){    
     if(newDate.year*100+newDate.month < minDate){
-      return {
-        year: Math.floor(minDate/100),
-        month: minDate%100,
-        isCapped: true
-      };
-    }else if(newDate.year*100+newDate.month>maxDate){
-      return {
-        year: Math.floor(maxDate/100),
-        month: maxDate%100,
-        isCapped: true
-      };
+      return this.getCappedDate(minDate);
+    }else if(newDate.year*100+newDate.month > maxDate){
+      return this.getCappedDate(maxDate);
     }
     return newDate;
   }
 
-  getStyle(isCapped){
+  getCappedDate(cappedDate){
+    let cappedYear = Math.floor(cappedDate/100);
+    return {
+      year: cappedYear,
+      month: cappedDate%100,
+      isEndOfRange: this.props.year*100 + this.props.month == cappedDate
+                || this.isEndOfYearRange(this.props.year, cappedYear)
+    };
+  }
+
+  isEndOfYearRange(curYear, cappedYear){
+    return this.props.month == null && curYear == cappedYear;
+  }
+
+  getStyle(isEndOfRange){
     let styles = {color:'grey', cursor:'default'};
-    return isCapped ? styles : {};
+    return isEndOfRange ? styles : {};
   }
 
   render() {
