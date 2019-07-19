@@ -17,7 +17,7 @@ class TransactionsContainer extends Component {
 
   render(){
     let year = this.extractFromPath('year');
-    let month = this.extractFromPath('month') ? this.extractFromPath('month') : 1;
+    let month = this.extractFromPath('month') ? this.extractFromPath('month') : null;
     let type = this.extractFromPath('type')
 
     return(
