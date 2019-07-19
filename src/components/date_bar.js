@@ -7,7 +7,11 @@ let maxDate;
 
 export default class DateBar extends Component {
   setDateRange(){
-    let dateRange = Object.keys(this.props.transactions).map(year => Object.keys(this.props.transactions[year]).map(month => year*100 + month*1)).flat();
+    let dateRange = Object.keys(this.props.transactions)
+                            .map(year => 
+                              Object.keys(this.props.transactions[year])
+                                .map(month => 
+                                  year*100 + month*1)).flat();
 
     minDate = Math.min(...dateRange);
     maxDate = Math.max(...dateRange);
@@ -38,7 +42,7 @@ export default class DateBar extends Component {
   }
 
   checkAgainstRange(newDate){
-    if(newDate.year*100+newDate.month<minDate){
+    if(newDate.year*100+newDate.month < minDate){
       return {
         year: Math.floor(minDate/100),
         month: minDate%100,
@@ -83,5 +87,3 @@ export default class DateBar extends Component {
     );
   }
 }
-
-//Need to fix the fact that when it greys out the arrows it takes you to the latest of the range if it can't move a full 12-months
