@@ -7,22 +7,28 @@ let maxDate;
 
 export default class DateBar extends Component {
   setDateRange(){
-    let dateRange = Object.keys(this.props.transactions)
-                            .map(year => 
-                              Object.keys(this.props.transactions[year])
-                                .map(month => 
-                                  year*100 + month*1)).flat();
-                                  
-    minDate = Math.min(...dateRange);
-    maxDate = Math.max(...dateRange);
+    let dateRange = Object.keys(this.props.transactions).map(id => this.props.transactions[id].date).sort();
+
+    minDate = this.formatDate(dateRange[0]);
+    maxDate = this.formatDate(dateRange[dateRange.length - 1]);
+  }
+
+  formatDate(argDate){
+    let oldFormatDate = new Date(argDate)
+    return oldFormatDate.getFullYear() * 100 + oldFormatDate.getMonth() + 1;
   }
 
   getArrow(monthsMoved, arrowIcon){
-    let newDate = this.getDate(monthsMoved);
+    let newDate = this.getDateObj(monthsMoved);
     newDate = this.checkAgainstRange(newDate);
 
+    if(newDate.isEndOfRange)
+      return (
+        <span style={this.getStyle(true)}>{arrowIcon}</span>
+      );
+
     return (
-      <Link to={this.getLink(newDate)} style={this.getStyle(newDate.isEndOfRange)}>{arrowIcon}</Link>
+      <Link to={this.getLink(newDate)} style={this.getStyle(false)}>{arrowIcon}</Link>
     );
   }
 
@@ -33,19 +39,18 @@ export default class DateBar extends Component {
     return `/${this.props.type}/${newDate.year}`;
   }
 
-  getDate(monthsMoved){
+  getDateObj(monthsMoved){
     let newMonth = this.props.month == null ? 1 : this.props.month;
     let newDate = new Date;
-    newDate.setFullYear(this.props.year, newMonth + monthsMoved,1);
-    let offset = ((this.props.month + monthsMoved) == 0) ? 1 : 0;
+    newDate.setFullYear(this.props.year, (newMonth-1) + monthsMoved,1); //monthIndex needs to be passed to setFullYear
 
-    return {year:newDate.getYear() + 1900 - offset,month:newDate.getMonth() + offset*12, isEndOfRange:false};
+    return {year:newDate.getFullYear(),month:newDate.getMonth() + 1, isEndOfRange:false};
   }
 
-  checkAgainstRange(newDate){    
-    if(newDate.year*100+newDate.month < minDate){
+  checkAgainstRange(newDate){ 
+    if(newDate.year * 100 + newDate.month < minDate){
       return this.getCappedDate(minDate);
-    }else if(newDate.year*100+newDate.month > maxDate){
+    }else if(newDate.year * 100 + newDate.month > maxDate){
       return this.getCappedDate(maxDate);
     }
     return newDate;
@@ -73,7 +78,7 @@ export default class DateBar extends Component {
   render() {
     this.setDateRange();
     let barStyle = {textAlign:'center', backgroundColor:'#ddd'};
-    let spanStyle = {width: 'auto', margin: '5px'};
+    let spanStyle = {width: '110px', margin: '5px'};
     if (this.props.type=='transactions') {
       return(
         <div className='dateBar' style={barStyle}>

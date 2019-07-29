@@ -9,7 +9,7 @@ export default class TransactionDisplay extends Component {
     this.renderTransaction = this.renderTransaction.bind(this);
   }
 
-  renderTransaction(transaction){
+  renderTransaction(transaction){    
     if (!transaction.isVisible) {
       return;
     }
@@ -38,7 +38,8 @@ export default class TransactionDisplay extends Component {
           </tr>
         </thead>
         <tbody>
-          { Object.keys(this.props.transactions).reverse().map(day => Object.keys(this.props.transactions[day]).map(id => this.renderTransaction(this.props.transactions[day][id]))) }
+          { Object.keys(this.props.transactions)
+              .map(id => this.renderTransaction(this.props.transactions[id])) }
         </tbody>
       </table>
     );

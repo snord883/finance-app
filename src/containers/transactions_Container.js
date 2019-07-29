@@ -20,6 +20,23 @@ class TransactionsContainer extends Component {
     let month = this.extractFromPath('month') ? this.extractFromPath('month') : null;
     let type = this.extractFromPath('type')
 
+    let getTransactions = (monthlyBreakDown) => {
+      //month-1, because Date takes a monthIndex starting at 0
+      let adjBeginningMonth = monthlyBreakDown ? month - 1 : 1;
+      let adjEndingMonth = monthlyBreakDown ? month : 1;
+      let adjEndingYear = monthlyBreakDown ? year : year + 1;
+      return Object.keys(this.props.transactions)
+                  .filter(
+                    id => {
+                      return this.props.transactions[id].date >= new Date(year, adjBeginningMonth, 1) &&
+                              this.props.transactions[id].date <  new Date(adjEndingYear, adjEndingMonth, 1);
+                    })
+                  .map(
+                    id => {
+                      return this.props.transactions[id];
+                    })
+    }
+
     return(
       <div>
         <Tabs type={type}/>
@@ -27,7 +44,7 @@ class TransactionsContainer extends Component {
         <Switch>
           <Route exact path="/transactions/:year/:month" component ={(props) =>
             <TransactionDisplay {...props}
-              transactions={this.props.transactions[year][month]}
+              transactions={ getTransactions(true) }
               individuals={this.props.individuals}
               categories={this.props.categories}
               onEditTransaction={ this.props.onEditTransaction }
@@ -35,7 +52,7 @@ class TransactionsContainer extends Component {
           />
           <Route exact path="/budget/:year" component={(props) =>
             <BudgetDisplay  {...props}
-              transactions={this.props.transactions[year]}
+              transactions={ getTransactions(false) }
               categories={this.props.categories}
             />}
           />

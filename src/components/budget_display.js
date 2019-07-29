@@ -12,9 +12,15 @@ class BudgetCategory extends Component {
   }
 
   getMonthlyBreakdown(){
-    let monthlyTransactions = Object.keys(this.props.transactions).map(m => Object.keys(this.props.transactions)[m]);
-    // console.log(Object.keys(monthlyTransactions));
-    monthlyTransactions.map(day => Object.keys(monthlyTransactions[day]).map(trans => monthlyTransactions[day][trans]));
+      let monthlyTransactions = Object.keys(this.props.transactions)
+                .map(month => Object.keys(this.props.transactions[month])
+                  .map(day => Object.keys(this.props.transactions[month][day])
+                    .filter(transaction =>                      
+                      this.props.transactions[month][day][transaction].category === this.props.category.name)
+                      ))
+                      ;
+
+      // console.log(`${this.props.category.name}: ${monthlyTransactions.map(trans => console.log(trans))}`);   
   }
 
   render() {
@@ -39,7 +45,7 @@ export default class BudgetDisplay extends Component {
   }
 
   renderBody(){
-    let categories = this.props.categories;
+    let categories = this.props.categories;    
 
     return (
       <tbody>
@@ -58,7 +64,7 @@ export default class BudgetDisplay extends Component {
             <th style={stylesDataHeaders}>TOTAL</th>
           </tr>
         </thead>
-
+        {this.renderBody()}
       </table>
     );
   }
@@ -66,4 +72,4 @@ export default class BudgetDisplay extends Component {
 
 //{this.renderBody()}
 //Add a reducer for groups so then when I stream through the budget I can go through the groups first and then if they are expanded then I can open it's subitems
-//Also it would be easier to create new groups or delete new groups.
+//Also it would be easier to create new groups or delete groups.
