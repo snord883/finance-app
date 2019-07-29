@@ -20,7 +20,7 @@ class BudgetCategory extends Component {
                       ))
                       ;
 
-      console.log(`${this.props.category.name}: ${monthlyTransactions.map(trans => console.log(trans))}`);   
+      // console.log(`${this.props.category.name}: ${monthlyTransactions.map(trans => console.log(trans))}`);   
   }
 
   render() {
