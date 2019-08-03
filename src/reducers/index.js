@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import TransactionsReducer from './reducer_transactions';
-import CategoriesReducer from './reducer_categories2';
+import CategoriesReducer from './reducer_categories';
 import IndividualsReducer from './reducer_individuals';
 
 const rootReducer = combineReducers({

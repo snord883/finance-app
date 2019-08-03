@@ -6,7 +6,7 @@ import { onEditTransaction } from '../actions/index';
 import Tabs from '../components/tabs';
 import DateBar from '../components/date_bar';
 import TransactionDisplay from '../components/transaction_display';
-import BudgetDisplay from '../components/budget_display2';
+import BudgetDisplay from '../components/budget_display';
 
 class TransactionsContainer extends Component {
   extractFromPath(part){
