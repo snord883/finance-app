@@ -6,7 +6,7 @@ import { onEditTransaction } from '../actions/index';
 import Tabs from '../components/tabs';
 import DateBar from '../components/date_bar';
 import TransactionDisplay from '../components/transaction_display';
-import BudgetDisplay from '../components/budget_display';
+import BudgetDisplay from '../components/budget_display2';
 
 class TransactionsContainer extends Component {
   extractFromPath(part){
@@ -22,8 +22,8 @@ class TransactionsContainer extends Component {
 
     let getTransactions = (monthlyBreakDown) => {
       //month-1, because Date takes a monthIndex starting at 0
-      let adjBeginningMonth = monthlyBreakDown ? month - 1 : 1;
-      let adjEndingMonth = monthlyBreakDown ? month : 1;
+      let adjBeginningMonth = monthlyBreakDown ? month - 1 : 0;
+      let adjEndingMonth = monthlyBreakDown ? month : 0;
       let adjEndingYear = monthlyBreakDown ? year : year + 1;
       return Object.keys(this.props.transactions)
                   .filter(

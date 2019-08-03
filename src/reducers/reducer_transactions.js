@@ -13,7 +13,7 @@ const initialState = {
 	2147483185: { id: 2147483185, date: 1534464000000, description: "WHOLEFDS CIN 10287", category: "Groceries", individual: "Both", amount: -72.55, isVisible: true },
 	2147483186: { id: 2147483186, date: 1534464000000, description: "SOUTHWES  5261478963587", category: "Transportation", individual: "Both", amount: -156.1, isVisible: true },
 	2147483187: { id: 2147483187, date: 1534377600000, description: "MIOS ANDERSON", category: "Meals (Food)", individual: "Both", amount: -67.25, isVisible: true },
-	2147483188: { id: 2147483188, date: 1534377600000, description: "MT AUBURN URGENT CARE", category: "Medical", individual: "Both", amount: -205, isVisible: true },
+	2147483188: { id: 2147483188, date: 1534377600000, description: "MT AUBURN URGENT CARE", category: "General Care", individual: "Both", amount: -205, isVisible: true },
 	2147483189: { id: 2147483189, date: 1534291200000, description: "CRATE&BARREL CB2 NOD", category: "Wedding", individual: "Both", amount: -49.55, isVisible: true },
 	2147483190: { id: 2147483190, date: 1534291200000, description: "TICKETS*CINCIN REDS", category: "Entertainment", individual: "Both", amount: -84.5, isVisible: true },
 	2147483191: { id: 2147483191, date: 1534291200000, description: "DNC GRT AMR BALLPARK F", category: "Beer", individual: "Both", amount: -16.25, isVisible: true },
@@ -34,7 +34,7 @@ const initialState = {
 	2147483206: { id: 2147483206, date: 1533600000000, description: "LITTLE CAESARS 1586 00", category: "Meals (Food)", individual: "Both", amount: -11.1, isVisible: true },
 	2147483207: { id: 2147483207, date: 1533427200000, description: "DELTA     00623355459801", category: "Transportation", individual: "Both", amount: -178.4, isVisible: true },
 	2147483208: { id: 2147483208, date: 1533427200000, description: "DELTA     00623355459790", category: "Transportation", individual: "Both", amount: -178.4, isVisible: true },
-	2147483209: { id: 2147483209, date: 1533340800000, description: "MEDICAL MUTUAL OF OHIO", category: "Medical", individual: "Both", amount: -416.9, isVisible: true },
+	2147483209: { id: 2147483209, date: 1533340800000, description: "MEDICAL MUTUAL OF OHIO", category: "General Care", individual: "Both", amount: -416.9, isVisible: true },
 	2147483210: { id: 2147483210, date: 1533254400000, description: "TRADER JOE'S #669  QPS", category: "Groceries", individual: "Both", amount: -98.89, isVisible: true },
 	2147483211: { id: 2147483211, date: 1533254400000, description: "PASSPORT PARKING", category: "Entertainment", individual: "Both", amount: -1.96, isVisible: true },
 	2147483212: { id: 2147483212, date: 1533081600000, description: "DENTATRUST", category: "Dentist", individual: "Both", amount: -29.37, isVisible: true },
@@ -61,7 +61,7 @@ const initialState = {
 	2147483233: { id: 2147483233, date: 1532736000000, description: "LYFT   *RIDE FRI 10PM", category: "Transportation", individual: "Both", amount: -2, isVisible: true },
 	2147483234: { id: 2147483234, date: 1532736000000, description: "MARATHON PETRO186312", category: "Gas", individual: "Both", amount: -24.5, isVisible: true },
 	2147483235: { id: 2147483235, date: 1532736000000, description: "AMERICAN  0010263210165", category: "Transportation", individual: "Both", amount: -25, isVisible: true },
-	2147483236: { id: 2147483236, date: 1532649600000, description: "WALGREENS #7089", category: "Medical", individual: "Both", amount: -9.99, isVisible: true },
+	2147483236: { id: 2147483236, date: 1532649600000, description: "WALGREENS #7089", category: "General Care", individual: "Both", amount: -9.99, isVisible: true },
 	2147483237: { id: 2147483237, date: 1532649600000, description: "RICKYS BLUE HEAVEN RES", category: "Meals (Travel)", individual: "Both", amount: -67.25, isVisible: true },
 	2147483238: { id: 2147483238, date: 1532563200000, description: "TWC*TIMEWARNERCABLE", category: "Internet", individual: "Both", amount: -44.99, isVisible: true },
 	2147483239: { id: 2147483239, date: 1532563200000, description: "BOYDS KEY WEST CAMPGRO", category: "Accomodation", individual: "Both", amount: 75, isVisible: true },
@@ -135,7 +135,7 @@ const initialState = {
 	2147483307: { id: 2147483307, date: 1529625600000, description: "OLD MOHAWK", category: "Meals (Food)", individual: "Both", amount: -31.25, isVisible: true },
 	2147483308: { id: 2147483308, date: 1529452800000, description: "CINCINNATI PARKING FEE", category: "Entertainment", individual: "Both", amount: -4, isVisible: true },
 	2147483309: { id: 2147483309, date: 1529452800000, description: "KROGER #423", category: "Groceries", individual: "Both", amount: -36.86, isVisible: true },
-	2147483310: { id: 2147483310, date: 1529452800000, description: "MEDICAL MUTUAL OF OHIO", category: "Medical", individual: "Both", amount: -416.9, isVisible: true },
+	2147483310: { id: 2147483310, date: 1529452800000, description: "MEDICAL MUTUAL OF OHIO", category: "General Care", individual: "Both", amount: -416.9, isVisible: true },
 	2147483311: { id: 2147483311, date: 1529280000000, description: "SPEEDWAY 03623 282", category: "Gas", individual: "Both", amount: -16.75, isVisible: true },
 	2147483312: { id: 2147483312, date: 1529280000000, description: "Little Apple Golf Cour", category: "Entertainment", individual: "Both", amount: -4.5, isVisible: true },
 	2147483313: { id: 2147483313, date: 1529280000000, description: "Little Apple Golf Cour", category: "Entertainment", individual: "Both", amount: -19, isVisible: true },
@@ -167,7 +167,7 @@ const initialState = {
 	2147483339: { id: 2147483339, date: 1527897600000, description: "SHELL OIL 574430203QPS", category: "Gas", individual: "Both", amount: -38.5, isVisible: true },
 	2147483340: { id: 2147483340, date: 1527811200000, description: "DENTATRUST", category: "Dentist", individual: "Both", amount: -29.37, isVisible: true },
 	2147483341: { id: 2147483341, date: 1527811200000, description: "TMOBILE*AUTO PAY", category: "Phone", individual: "Both", amount: -226.42, isVisible: true },
-	2147483342: { id: 2147483342, date: 1527811200000, description: "MEDICAL MUTUAL OF OHIO", category: "Medical", individual: "Both", amount: -416.9, isVisible: true },
+	2147483342: { id: 2147483342, date: 1527811200000, description: "MEDICAL MUTUAL OF OHIO", category: "General Care", individual: "Both", amount: -416.9, isVisible: true },
 	2147483343: { id: 2147483343, date: 1527811200000, description: "FIRESIDE PIZZA", category: "Meals (Food)", individual: "Both", amount: -34, isVisible: true },
 	2147483344: { id: 2147483344, date: 1527724800000, description: "APL* ITUNES.COM/BILL", category: "Materistic", individual: "Both", amount: -0.99, isVisible: true },
 	2147483345: { id: 2147483345, date: 1527638400000, description: "EXXONMOBIL    98907579", category: "Gas", individual: "Both", amount: -17.25, isVisible: true },
@@ -234,7 +234,7 @@ const initialState = {
 	2147483406: { id: 2147483406, date: 1524960000000, description: "JOSHUA GAS", category: "Gas", individual: "Both", amount: -39.75, isVisible: true },
 	2147483407: { id: 2147483407, date: 1524873600000, description: "AMBOY LLC", category: "Gas", individual: "Both", amount: -10, isVisible: true },
 	2147483408: { id: 2147483408, date: 1524873600000, description: "STATERBROS105", category: "Groceries", individual: "Both", amount: -5.23, isVisible: true },
-	2147483409: { id: 2147483409, date: 1524873600000, description: "MEDICAL MUTUAL OF OHIO", category: "Medical", individual: "Both", amount: -833.8, isVisible: true },
+	2147483409: { id: 2147483409, date: 1524873600000, description: "MEDICAL MUTUAL OF OHIO", category: "General Care", individual: "Both", amount: -833.8, isVisible: true },
 	2147483410: { id: 2147483410, date: 1524787200000, description: "STATERBROS105", category: "Groceries", individual: "Both", amount: -63.86, isVisible: true },
 	2147483411: { id: 2147483411, date: 1524787200000, description: "JOSHUA TREE NATL PARK", category: "Excursions", individual: "Both", amount: -80, isVisible: true },
 	2147483412: { id: 2147483412, date: 1524700800000, description: "TWC*TIMEWARNERCABLE", category: "Internet", individual: "Both", amount: -44.99, isVisible: true },
@@ -356,7 +356,7 @@ const initialState = {
 	2147483528: { id: 2147483528, date: 1519516800000, description: "GIANT-EAGLE #1284", category: "Groceries", individual: "Both", amount: -21.33, isVisible: true },
 	2147483529: { id: 2147483529, date: 1519516800000, description: "GETGO CAFE & FUEL #301", category: "Gas", individual: "Both", amount: -28.75, isVisible: true },
 	2147483530: { id: 2147483530, date: 1519430400000, description: "HECKS CAFE  RESTAURAN", category: "Meals (Food)", individual: "Both", amount: -62.25, isVisible: true },
-	2147483531: { id: 2147483531, date: 1519344000000, description: "WESTERN HEALTH ADVANTA", category: "Medical", individual: "Both", amount: -283.85, isVisible: true },
+	2147483531: { id: 2147483531, date: 1519344000000, description: "WESTERN HEALTH ADVANTA", category: "General Care", individual: "Both", amount: -283.85, isVisible: true },
 	2147483532: { id: 2147483532, date: 1519344000000, description: "MARSHALLS #1101", category: "Materistic", individual: "Both", amount: -5.34, isVisible: true },
 	2147483533: { id: 2147483533, date: 1519344000000, description: "MCDONALD'S F32059", category: "Meals (Food)", individual: "Both", amount: -4.99, isVisible: true },
 	2147483534: { id: 2147483534, date: 1519257600000, description: "TARGET        00025577", category: "Materistic", individual: "Both", amount: -8.56, isVisible: true },
@@ -434,7 +434,7 @@ const initialState = {
 	2147483606: { id: 2147483606, date: 1516060800000, description: "Delanies Grille", category: "Meals (Food)", individual: "Both", amount: -22.25, isVisible: true },
 	2147483607: { id: 2147483607, date: 1515888000000, description: "GIANT-EAGLE #4078", category: "Groceries", individual: "Both", amount: -48.54, isVisible: true },
 	2147483608: { id: 2147483608, date: 1515888000000, description: "ALDI 63036", category: "Groceries", individual: "Both", amount: -76.85, isVisible: true },
-	2147483609: { id: 2147483609, date: 1515801600000, description: "WESTERN HEALTH ADVANTA", category: "Medical", individual: "Both", amount: -567.7, isVisible: true },
+	2147483609: { id: 2147483609, date: 1515801600000, description: "WESTERN HEALTH ADVANTA", category: "General Care", individual: "Both", amount: -567.7, isVisible: true },
 	2147483610: { id: 2147483610, date: 1515715200000, description: "THE MANOR", category: "Meals (Food)", individual: "Both", amount: -33.25, isVisible: true },
 	2147483611: { id: 2147483611, date: 1515715200000, description: "BUREAU OF MOTOR VEHICL", category: "Car Repairs", individual: "Both", amount: -97.64, isVisible: true },
 	2147483612: { id: 2147483612, date: 1515715200000, description: "OPLATES CRDT CRD SRV F", category: "Car Repairs", individual: "Both", amount: -1.95, isVisible: true },
@@ -482,13 +482,7 @@ export default function(state=initialState, action){
   switch (action.type) {
       case EDIT_TRANSACTION:
         const newTransaction = {...initTransaction, [action.payload.property]:action.payload.value};
-        const tDate = getDateObject(newTransaction.date);
         return {...state,[newTransaction.id]: newTransaction};
     }
   return state;
-}
-
-function getDateObject(date){
-  var trDate = new Date(date).toLocaleDateString().split('/');
-  return {month:trDate[0]*1, day:trDate[1]*1, year:trDate[2]*1};
 }

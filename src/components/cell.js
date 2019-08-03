@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react';
 
-export default class Cells extends PureComponent {
+export default class Cell extends PureComponent {
   constructor(props) {
     super(props);
 

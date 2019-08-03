@@ -6,7 +6,7 @@ export default class Dropdown extends Component {
 
     this.state= {
       isExpanded: false,
-      isChecked: this.isInitiallyChecked(this.props.option)
+      isChecked: this.props.option.isIncluded
     }
 
     this.isInitiallyChecked = this.isInitiallyChecked.bind(this);

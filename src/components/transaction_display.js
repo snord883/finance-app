@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cell from '../components/cells';
+import Cell from './cell';
 import Filter from '../components/filters';
 
 export default class TransactionDisplay extends Component {

@@ -1,33 +1,57 @@
 import React, { Component } from 'react';
-import Cell from '../components/cells';
 
 let monthMap = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov", "Dec"];
-let stylesColumnWidths = {display:'grid', gridTemplateColumns: '12% repeat(12, 6.5%) 10%'};
+
+let stylesColumnWidths = {display:'grid', gridTemplateColumns: '14% repeat(12, 6.5%) 8%'};
 let stylesDataHeaders={display:'table-cell', width:'100%', padding:'12px 6px'};
-let stylesData={display:'table-cell', width:'100%'};
+let stylesRowLabel={display:'table-cell', width:'100%' };
+let stylesData={ ...stylesRowLabel, ...{textAlign:'center', fontSize:'14px', lineHeight:'31px'} };
+let stylesDataNegative={ ...stylesData, ...{ color:'red' } };
+let stylesButton ={ padding: '0 2px', backgroudColor:'inherit', border: 'none' }
 
-class BudgetCategory extends Component {
-  getCategoryTotal(transaction){
-    console.log(transaction.category);
+class BudgetTransactionRow extends Component {
+  getTotal(monthlyAmounts){
+    return monthlyAmounts.reduce((total, monthlyAmount) => total + monthlyAmount);
   }
-
+  
   getMonthlyBreakdown(){
-      let monthlyTransactions = Object.keys(this.props.transactions)
-                .map(month => Object.keys(this.props.transactions[month])
-                  .map(day => Object.keys(this.props.transactions[month][day])
-                    .filter(transaction =>                      
-                      this.props.transactions[month][day][transaction].category === this.props.category.name)
-                      ))
-                      ;
+    let transactions = this.props.transactions;
+    
+    let monthlyTransactions = [0,1,2,3,4,5,6,7,8,9,10,11].map(monthId =>    
+                                  Object.keys(transactions)
+                                    .filter(id =>
+                                      new Date(transactions[id].date).getMonth() == monthId
+                                    ).reduce((sum, id) =>
+                                      sum + transactions[id].amount, 0
+                                    )
+                              );
 
-      // console.log(`${this.props.category.name}: ${monthlyTransactions.map(trans => console.log(trans))}`);   
+    monthlyTransactions.push(this.getTotal(monthlyTransactions));
+    return monthlyTransactions; 
   }
+
+  formatNumber(num){
+    if(num === 0) return '-';
+    return num < 0 ? `(${ (-1 * num.toFixed(2)).toLocaleString() })` : num.toFixed(2).toLocaleString()
+  }
+
 
   render() {
-    this.getMonthlyBreakdown();
+    let category = this.props.category;
+    
     return(
       <tr style={stylesColumnWidths}>
-        <td style={stylesData}>{this.props.category.name}</td>
+          <td style={stylesRowLabel}>
+            { category.name }
+            { (this.props.category.subItems) && <button style={ stylesButton } className="btn btn-secondary btn-sm" onClick={(e) => this.props.toggleSubGroup(e, category.name)}>{ this.props.isExpanded ? '-' : '+' }</button> }
+          </td>
+        { this.getMonthlyBreakdown().map((monthlyAmount,i) =>
+          <td
+            key={ i }
+            style={ monthlyAmount>=0 ? stylesData : stylesDataNegative } >
+            { this.formatNumber(monthlyAmount) }
+          </td>)
+        }
       </tr>
     );
   }
@@ -37,21 +61,65 @@ export default class BudgetDisplay extends Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      type: 'budget'
+    this.state= {
+      expandedGroups: []
     }
 
-    this.renderBody = this.renderBody.bind(this);
+    this.toggleSubGroup = this.toggleSubGroup.bind(this);
   }
 
-  renderBody(){
-    let categories = this.props.categories;    
-
-    return (
-      <tbody>
-        { Object.keys(categories).map(n => <BudgetCategory key={n} category={categories[n]} transactions={this.props.transactions}/>) }
-      </tbody>
+getTransactionsByCategories = (transactions, category) => 
+          Object.keys(transactions)
+                  .filter(id =>
+                    this.getAllCategoriesFromSubGroupings(category, []).includes(transactions[id].category)
+                  )
+                  .map(id =>
+                    transactions[id]
+                  );
+      
+getAllCategoriesFromSubGroupings = (category, allCategoriesFromSubGroupings) => {
+  if(category.subItems){
+    category.subItems.forEach(item =>
+      this.getAllCategoriesFromSubGroupings(item, allCategoriesFromSubGroupings)
     );
+  } else {
+    allCategoriesFromSubGroupings.push(category.name);
+  }
+
+  return allCategoriesFromSubGroupings;
+}
+
+  getVisibleGroups(){
+    let visibleGroups = [];
+    Object.keys(this.props.categories).forEach(id => {
+      visibleGroups = this.addSubItemsToVisibleGroups(this.props.categories[id], visibleGroups);
+    });
+
+    return visibleGroups.flat();
+  }
+
+  addSubItemsToVisibleGroups(category, visibleGroups){
+    visibleGroups.push(category)
+    
+    if(this.state.expandedGroups.includes(category.name) && category.subItems){
+        category.subItems.forEach(item =>
+          this.addSubItemsToVisibleGroups(item, visibleGroups)
+        );
+    }
+
+    return visibleGroups;
+  }
+
+  toggleSubGroup(e, name){
+    e.preventDefault();
+    
+    let tempArr = this.state.expandedGroups;
+    if(!this.state.expandedGroups.includes(name))
+      tempArr.push(name);
+    else
+      tempArr = tempArr.filter(element => element !== name)
+
+    this.setState({ expandedGroups: tempArr });
   }
 
   render(){
@@ -64,12 +132,24 @@ export default class BudgetDisplay extends Component {
             <th style={stylesDataHeaders}>TOTAL</th>
           </tr>
         </thead>
-        {this.renderBody()}
+        <tbody>
+          { 
+            this.getVisibleGroups().map((category,i) =>
+              <BudgetTransactionRow
+                key={ i }
+                category= { category }
+                isExpanded= { this.state.expandedGroups.includes(category.name) }
+                toggleSubGroup= { this.toggleSubGroup }
+                transactions= { 
+                  category.name==='ALL' ?
+                    this.props.transactions
+                    :
+                    this.getTransactionsByCategories(this.props.transactions, category) }
+              />
+            )
+          }
+        </tbody>
       </table>
     );
   }
 }
-
-//{this.renderBody()}
-//Add a reducer for groups so then when I stream through the budget I can go through the groups first and then if they are expanded then I can open it's subitems
-//Also it would be easier to create new groups or delete groups.
